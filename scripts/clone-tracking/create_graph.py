@@ -9,7 +9,7 @@ if __name__ == "__main__":
     out_file = "../../assets/dashboard.html"
     output_file(out_file)
 
-    df = pd.read_csv("../../_data/clone-tracking/all_repos_cumulative.csv")
+    df = pd.read_csv("../../_data/clone-tracking/cumulative/all_repos_cumulative.csv")
     df["date"] = pd.to_datetime(df["date"])
     REPOS = list(df)[1:]
 
