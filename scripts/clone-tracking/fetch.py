@@ -1,6 +1,5 @@
 """Fetch download statistics for a GitHub repository and output to a directory."""
 
-import argparse
 import os
 from datetime import date
 from datetime import datetime as dt
