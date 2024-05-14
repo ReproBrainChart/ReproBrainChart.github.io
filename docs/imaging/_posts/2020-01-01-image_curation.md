@@ -19,7 +19,7 @@ window.onload = function() {
 </script>
 
 <div id="carouselBox" style="background-color: gray; width: 90%; height: 400px; position: relative; display: flex; align-items: center;">
-    <div id="carouselDataHarmonization" class="carousel slide carousel-fade" data-interval="50000" data-ride="carousel" style="width: 90%; margin: auto;">
+    <div id="carouselDataHarmonization" class="carousel slide carousel-fade" data-interval="5000" data-ride="carousel" style="width: 90%; margin: auto;">
         <div class="carousel-inner">
             <div class="carousel-item active" style="height: 400px;">
                 <img class="d-block mx-auto" style="height: 400px;" src="/assets/images/datasets/Figure_Harmonization_v1_a.png" alt="First slide">
