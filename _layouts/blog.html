@@ -1,0 +1,14 @@
+---
+layout: archive
+---
+
+{{ content }}
+
+{% assign entries_layout = page.entries_layout | default: 'list' %}
+{% assign blog_posts = site.posts | where_exp: "post", "post.path contains 'blog'" %}
+<div class="entries-{{ entries_layout }}">
+  {% for post in blog_posts %}
+    {% include archive-single.html type=entries_layout %}
+  {% endfor %}
+</div>
+<a href="#page-title" class="back-to-top">{{ site.data.ui-text[site.locale].back_to_top | default: 'Back to Top' }} &uarr;</a>

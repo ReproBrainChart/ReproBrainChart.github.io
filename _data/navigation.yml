@@ -43,5 +43,7 @@ main:
       url: /docs/community/contribute
     - title: "Get support"
       url: /docs/community/get_support
+- title: Blog
+  url: /docs/blog/index
 - title: <em style="font-style:normal; font-weight:bold; color:#3F8AAC;"> Get Data </em>
   url: /docs/get_data
