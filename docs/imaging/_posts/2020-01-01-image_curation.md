@@ -12,7 +12,7 @@ CuBIDS is a sanity preserving workflow that summarizes the heterogeneity in a MR
     <img src="/assets/images/misc/cubids_workflow.png" width="auto" height="500" />
 </div>
 
-<div id="carouselBox" style="background-color: gray; width: 90%; height: 400px; position: relative; display: flex; align-items: center;">
+<div id="carouselBox" style="background-color: gray; width: 90%; height: 400px; position: relative; display: flex; align-items: center; margin: auto;">
     <div id="carouselDataHarmonization" class="carousel slide carousel-fade" data-interval="5000" data-ride="carousel" style="width: 90%; margin: auto; background-color: gray;">
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -28,7 +28,7 @@ CuBIDS is a sanity preserving workflow that summarizes the heterogeneity in a MR
                 <img class="d-block mx-auto" style="height: 400px;" src="/assets/images/datasets/Figure_Harmonization_v1_d.png" alt="Fourth slide">
             </div>
             <div class="carousel-item">
-                <img class="d-block mx-auto" style="width: 80%;" src="/assets/images/datasets/Figure_Harmonization_v1_e.png" alt="Fifth slide">
+                <img class="d-block mx-auto" style="width: 80%; margin: auto;" src="/assets/images/datasets/Figure_Harmonization_v1_e.png" alt="Fifth slide">
             </div>
             <a class="carousel-control-prev" href="#carouselDataHarmonization" role="button" data-slide="prev" style="width: 10%;">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
