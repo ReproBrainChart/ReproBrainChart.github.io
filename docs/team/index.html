@@ -6,27 +6,27 @@ title: Team RBC
 
 <br>
 
-<table style="display: flex; justify-content: center;">
+<table style="justify-content: center; width: 1000px; display: table;">
 	{% tablerow member in team cols:2 %}
 		{% if member.image %}
 			{% assign image = member.image %}
 		{% else %}
 			{% assign image = "/assets/images/team/placeholder-user.png" %}
 		{% endif %}
-		<div class="media" style="display: flex; align-items: start; width:30vw; height:15vw">
-			<a class="pull-left" style="margin-right: 20px;">
-				<img src="{{ image }}" style="border-radius: 50%; width: 13vw; height: 13vw;">
+		<div class="media" style="align-items: start;">
+			<a class="pull-left" style="margin-right: 20px; width: 175px; height: 175px;">
+				<img src="{{ image }}" style="border-radius: 50%;">
 			</a>
 			<div class="media-body" style="word-wrap: break-word; overflow-wrap: break-word;">
-				<p style="margin: 0px;">
+				<p style="margin: 0px; font-size: 20px;">
 					{% if member.site %}
 						<a href="{{ member.site }}" class="off">{{ member.name }}</a>
 					{% else %}
 						{{ member.name }}
 					{% endif %}
 				</p>
-				<p style="margin: 0px;">{{ member.position }}</p>
-				<p style="margin: 0px;">{{ member.affiliation }}</p>
+				<p style="margin: 0px; font-size: 16px;">{{ member.position }}</p>
+				<p style="margin: 0px; font-size: 16px;">{{ member.affiliation }}</p>
 			</div>
 		</div>
 	{% endtablerow %}
