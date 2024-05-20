@@ -2,7 +2,8 @@
 name: "Taylor Salo"
 layout: single
 image: /assets/images/team/taylor-salo.jpg
-site: "https://www.linkedin.com/in/taylor-salo-3233b7a7"
+site: "https://tsalo.github.io/"
 position: "Senior Scientist"
 affiliation: "University of Pennsylvania"
+section: team
 ---
