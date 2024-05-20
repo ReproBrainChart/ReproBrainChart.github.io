@@ -279,7 +279,9 @@ defaults:
     values:
       layout: single
       author_profile: false
-      read_time: false
       comments: false
       share: false
       related: false
+      show_author: true
+      show_date: true
+      read_time: true

@@ -1,7 +1,16 @@
 {% comment %}<!--Template for metadata, including post date and read-time.-->{% endcomment %}
 {% assign document = post | default: page %}
-{% if document.read_time or document.show_date %}
+{% if document.read_time or document.show_date or document.show_author %}
   <p class="page__meta">
+    {% if document.show_author and document.author %}
+      {% assign author = document.author %}
+      <span class="page__meta-date">
+        Posted by {{ author }}
+      </span>
+    {% endif %}
+
+    {% if document.show_author and document.show_date %}<span class="page__meta-sep"></span>{% endif %}
+
     {% if document.show_date and document.date %}
       {% assign date = document.date %}
       <span class="page__meta-date">
