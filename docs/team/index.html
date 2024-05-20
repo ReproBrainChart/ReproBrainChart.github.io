@@ -3,31 +3,73 @@ layout: archive
 title: Team RBC
 ---
 {% assign team = site.categories.team | reverse %}
+{% assign sections = "leadership,team,contributors,alumni" | split:"," %}
+{% assign section_titles = "RBC Leadership,RBC Team,RBC Contributors,RBC Alumni" | split:"," %}
 
-<br>
-
-<table style="justify-content: center; width: 1000px; display: table;">
-	{% tablerow member in team cols:2 %}
-		{% if member.image %}
-			{% assign image = member.image %}
-		{% else %}
-			{% assign image = "/assets/images/team/placeholder-user.png" %}
+{% for section in sections %}
+    {% assign team_in_section = team | where:"section", section %}
+    {% if team_in_section.size > 0 %}
+        <h2 style="text-align: center;">{{ section_titles[forloop.index0] }}</h2>
+        <br>
+        <table style="justify-content: center; width: 1000px; display: table;">
+            {% tablerow member in team_in_section cols:2 %}
+                {% if member.image %}
+                    {% assign image = member.image %}
+                {% else %}
+                    {% assign image = "/assets/images/team/placeholder-user.png" %}
+                {% endif %}
+                <div class="media" style="align-items: start;">
+					<a class="pull-left" style="margin-right: 20px; width: 175px; height: 175px; border-radius: 50%; overflow: hidden;">
+						<img src="{{ image }}" style="display: block; margin: auto;">
+					</a>
+                    <div class="media-body" style="word-wrap: break-word; overflow-wrap: break-word;">
+                        <p style="margin: 0px; font-size: 20px;">
+                            {% if member.site %}
+                                <a href="{{ member.site }}" class="off">{{ member.name }}</a>
+                            {% else %}
+                                {{ member.name }}
+                            {% endif %}
+                        </p>
+                        <p style="margin: 0px; font-size: 16px;">{{ member.position }}</p>
+                        <p style="margin: 0px; font-size: 16px;">{{ member.affiliation }}</p>
+                    </div>
+                </div>
+            {% endtablerow %}
+        </table>
+		{% if forloop.last == false %}
+			<br>
+			<br>
 		{% endif %}
-		<div class="media" style="align-items: start;">
-			<a class="pull-left" style="margin-right: 20px; width: 175px; height: 175px;">
-				<img src="{{ image }}" style="border-radius: 50%;">
-			</a>
-			<div class="media-body" style="word-wrap: break-word; overflow-wrap: break-word;">
-				<p style="margin: 0px; font-size: 20px;">
-					{% if member.site %}
-						<a href="{{ member.site }}" class="off">{{ member.name }}</a>
-					{% else %}
-						{{ member.name }}
-					{% endif %}
-				</p>
-				<p style="margin: 0px; font-size: 16px;">{{ member.position }}</p>
-				<p style="margin: 0px; font-size: 16px;">{{ member.affiliation }}</p>
-			</div>
-		</div>
-	{% endtablerow %}
-</table>
+    {% endif %}
+{% endfor %}
+
+{% assign other_team = team | where_exp:"item", "item.section == nil" %}
+{% if other_team.size > 0 %}
+    <h2 style="text-align: center;">Other</h2>
+    <br>
+    <table style="justify-content: center; width: 1000px; display: table;">
+        {% tablerow member in other_team cols:2 %}
+            {% if member.image %}
+                {% assign image = member.image %}
+            {% else %}
+                {% assign image = "/assets/images/team/placeholder-user.png" %}
+            {% endif %}
+            <div class="media" style="align-items: start;">
+                <a class="pull-left" style="margin-right: 20px; width: 175px; height: 175px;">
+                    <img src="{{ image }}" style="border-radius: 50%;">
+                </a>
+                <div class="media-body" style="word-wrap: break-word; overflow-wrap: break-word;">
+                    <p style="margin: 0px; font-size: 20px;">
+                        {% if member.site %}
+                            <a href="{{ member.site }}" class="off">{{ member.name }}</a>
+                        {% else %}
+                            {{ member.name }}
+                        {% endif %}
+                    </p>
+                    <p style="margin: 0px; font-size: 16px;">{{ member.position }}</p>
+                    <p style="margin: 0px; font-size: 16px;">{{ member.affiliation }}</p>
+                </div>
+            </div>
+        {% endtablerow %}
+    </table>
+{% endif %}
