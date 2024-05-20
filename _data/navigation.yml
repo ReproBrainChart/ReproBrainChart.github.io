@@ -23,6 +23,8 @@ main:
       url: /docs/imaging/image_curation
     - title: "Image Processing"
       url: /docs/imaging/image_processing
+    - title: "Image Harmonization"
+      url: /docs/imaging/image_harmonization
     - title: "Structural Image Quality"
       url: /docs/imaging/image_structural_qa
     - title: "Functional Image Quality"
