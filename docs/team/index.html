@@ -11,7 +11,7 @@ title: Team RBC
     {% if team_in_section.size > 0 %}
         <h2 style="text-align: center;">{{ section_titles[forloop.index0] }}</h2>
         <br>
-        <table style="justify-content: center; width: 1000px; display: table;">
+        <table style="justify-content: center; width: 1000px; display: table; table-layout: fixed;">
             {% tablerow member in team_in_section cols:2 %}
                 {% if member.image %}
                     {% assign image = member.image %}
@@ -30,6 +30,8 @@ title: Team RBC
                                 {{ member.name }}
                             {% endif %}
                         </p>
+						<p style="margin: 0px 0px 10px 0px; font-size: 16px;">{{ member.role }}</p>
+
                         <p style="margin: 0px; font-size: 16px;">{{ member.position }}</p>
                         <p style="margin: 0px; font-size: 16px;">{{ member.affiliation }}</p>
                     </div>
