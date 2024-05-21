@@ -23,15 +23,15 @@ title: Team RBC
 						<img src="{{ image }}" style="display: block; margin: auto;">
 					</a>
                     <div class="media-body" style="word-wrap: break-word; overflow-wrap: break-word;">
-                        <p style="margin: 0px; font-size: 20px;">
+                        <p style="margin: 0px; font-size: 20px; text-align: left; font-weight: bold;">
                             {% if member.site %}
                                 <a href="{{ member.site }}" class="off">{{ member.name }}</a>
                             {% else %}
                                 {{ member.name }}
                             {% endif %}
                         </p>
-                        <p style="margin: 0px; font-size: 16px;">{{ member.position }}</p>
-                        <p style="margin: 0px; font-size: 16px;">{{ member.affiliation }}</p>
+                        <p style="margin: 0px; font-size: 16px; text-align: left;">{{ member.position }}</p>
+                        <p style="margin: 0px; font-size: 16px; text-align: left;">{{ member.affiliation }}</p>
                     </div>
                 </div>
             {% endtablerow %}
