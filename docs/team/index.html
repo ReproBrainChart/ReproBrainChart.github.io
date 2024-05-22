@@ -24,11 +24,11 @@ title: Team RBC
 					</a>
                     <div class="media-body" style="word-wrap: break-word; overflow-wrap: break-word;">
                         <p style="margin: 0px; font-size: 20px; text-align: left; font-weight: bold;">
-                            {% if member.site %}
+                            {%- if member.site -%}
                                 <a href="{{ member.site }}" class="off">{{ member.name }}</a>
-                            {% else %}
+                            {%- else -%}
                                 {{ member.name }}
-                            {% endif %}
+                            {%- endif -%}{%- if member.degree -%}, {{ member.degree }}{%- endif -%}
                         </p>
                         <p style="margin: 0px; font-size: 16px; text-align: left;">{{ member.position }}</p>
                         <p style="margin: 0px; font-size: 16px; text-align: left;">{{ member.affiliation }}</p>
