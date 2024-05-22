@@ -105,5 +105,5 @@ author_profile: false
      <h2>RBC Downloads</h2>
      <br/>
 
-     <iframe src="/assets/dashboard.html" width="100%" height="600px"></iframe>
+     <iframe src="/assets/dashboard.html" width="100%" height="550px" style="border: none;"></iframe>
 </div>

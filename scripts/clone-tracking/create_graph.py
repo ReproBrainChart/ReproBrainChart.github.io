@@ -40,7 +40,7 @@ if __name__ == "__main__":
     curdoc().theme = "light_minimal"
 
     # plot
-    p = figure(width=800, height=500, x_axis_type="datetime", toolbar_location="above")
+    p = figure(width=600, height=500, x_axis_type="datetime", toolbar_location="above")
     p.circle(
         x="date",
         y="stats",
