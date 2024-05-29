@@ -5,6 +5,14 @@ layout: single
 
 ---
 
+<br/>
+
+<div style="text-align: center;">
+    <img src="/assets/images/logos/cubids.png" width="80%" height="auto" />
+</div>
+
+<br/>
+
 [CuBIDS](Reproducible and open science) was used for the curation of each of these datasets.
 CuBIDS is a sanity preserving workflow that summarizes the heterogeneity in a MRI BIDS dataset, helps prepare MRI datasets for preprocessing, and helps users perform metadata-based quality control on MRI BIDS data.
 
