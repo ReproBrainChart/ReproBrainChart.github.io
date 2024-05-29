@@ -89,7 +89,7 @@ author_profile: false
      <div style="display: flex; justify-content: space-between; width: 100%; margin: auto;">
           <img src="/assets/images/logos/university_of_pennsylvania.png" style="width: 60 px;height: 150px;" />
           <img src="/assets/images/logos/child_mind_institute.png" style="width: 60 px;height: 150px;" />
-          <img src="/assets/images/logos/nki.png" style="width: 60 px;height: 150px;" />
+          <img src="/assets/images/logos/NKI.png" style="width: 60 px;height: 150px;" />
           <img src="/assets/images/logos/CHOP.png" style="width: 60 px;height: 150px;" />
           <img src="/assets/images/logos/beijing_normal_university.png" style="width: 80 px;height: 150px;" />
           <img src="/assets/images/logos/columbia_university.png" style="width: 100 px; height: 150px;" />
