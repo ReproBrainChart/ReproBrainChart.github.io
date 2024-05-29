@@ -1,84 +1,30 @@
 {% capture logo_path %}{{ site.logo }}{% endcapture %}
 
-<!--
-<div class="masthead">
-  <div class="masthead__inner-wrap">
-    <div class="masthead__menu" style="display: flex; justify-content: center;">
-      <nav id="site-nav" class="greedy-nav">
-        {% unless logo_path == empty %}
-            <a class="site-logo" href="{{ '/' | relative_url }}"><img src="{{ logo_path | relative_url }}" alt="{{ site.masthead_title | default: site.title }}"></a>
-        {% endunless %}
-        <\!--
-        <a class="site-title" href="{{ '/' | relative_url }}">
-          {{ site.masthead_title | default: site.title }}
-          {% if site.subtitle %}<span class="site-subtitle">{{ site.subtitle }}</span>{% endif %}
-        </a>
-        --\>
-        <ul class="visible-links">
-            {%- for link in site.data.navigation.main -%}
-                {% assign class = nil %}
-                {% if page.url contains link.url %}
-                    {% assign class = 'active' %}
-                {% endif %}
-                {% if link.sublinks %}
-                    <li class="nav-item dropdown {{ class }}">
-                        <a class="nav-link dropdown-toggle" href="{{ site.baseurl }}{{ link.url }}" id="navbarDropdown-{{ link.title }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            {{ link.title }}
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown-{{ link.title }}">
-                            {% for sublink in link.sublinks %}
-                                <a class="dropdown-item" href="{{ site.baseurl }}{{ sublink.url }}">{{ sublink.title }}</a>
-                            {% endfor %}
-                        </div>
-                    </li>
-                {% else %}
-                    <li class="nav-item {{ class }}">
-                        <a class="nav-link" href="{{ site.baseurl }}{{ link.url }}">{{ link.title }}</a>
-                    </li>
-                {% endif %}
-            {% endfor %}
-        </ul>
-        {% if site.search == true %}
-        <button class="search__toggle" type="button">
-          <span class="visually-hidden">{{ site.data.ui-text[site.locale].search_label | default: "Toggle search" }}</span>
-          <svg class="icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15.99 16">
-            <path d="M15.5,13.12L13.19,10.8a1.69,1.69,0,0,0-1.28-.55l-0.06-.06A6.5,6.5,0,0,0,5.77,0,6.5,6.5,0,0,0,2.46,11.59a6.47,6.47,0,0,0,7.74.26l0.05,0.05a1.65,1.65,0,0,0,.5,1.24l2.38,2.38A1.68,1.68,0,0,0,15.5,13.12ZM6.4,2A4.41,4.41,0,1,1,2,6.4,4.43,4.43,0,0,1,6.4,2Z" transform="translate(-.01)"></path>
-          </svg>
-        </button>
-        {% endif %}
-        <button class="greedy-nav__toggle hidden" type="button">
-          <span class="visually-hidden">{{ site.data.ui-text[site.locale].menu_label | default: "Toggle menu" }}</span>
-          <div class="navicon"></div>
-        </button>
-        <ul class="hidden-links hidden"></ul>
-      </nav>
-    </div>
-  </div>
-</div>
--->
-
-<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-  <div class="container d-flex justify-content-between">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" role="navigation">
+    <div class="container d-flex justify-content-between">
         <a class="navbar-brand" href="#">
             {% unless logo_path == empty %}
                 <a class="site-logo" href="{{ '/' | relative_url }}"><img src="{{ logo_path | relative_url }}" alt="{{ site.masthead_title | default: site.title }}"></a>
             {% endunless %}
         </a>
 
-        <div class="collapse navbar-collapse">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav ml-auto">
                 {%- for link in site.data.navigation.main -%}
                     {% if link.sublinks %}
-                        <li class="nav-item dropdown collapse navbar-collapse">
+                        <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown-{{ link.title }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 {{ link.title }}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown-{{ link.title }}">
                                 {% unless link.hidden %}
-                                    <a class="dropdown-item" href="{{ site.baseurl }}{{ link.url }}">Overview</a>
+                                    <a class="nav-link dropdown-item" href="{{ site.baseurl }}{{ link.url }}">Overview</a>
                                 {% endunless %}
                                 {% for sublink in link.sublinks %}
-                                    <a class="dropdown-item" href="{{ site.baseurl }}{{ sublink.url }}">{{ sublink.title }}</a>
+                                    <a class="nav-link dropdown-item" href="{{ site.baseurl }}{{ sublink.url }}">{{ sublink.title }}</a>
                                 {% endfor %}
                             </div>
                         </li>

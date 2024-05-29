@@ -1,0 +1,27 @@
+---
+layout: default
+title: Sitemap
+permalink: /sitemap/
+---
+
+<h1>Sitemap</h1>
+
+<h2>Pages</h2>
+<ul>
+{% for page in site.pages %}
+    {% if page.title %}
+    <li>
+        <a href="{{ page.url | relative_url }}">{{ page.title }}</a>
+    </li>
+    {% endif %}
+{% endfor %}
+</ul>
+
+<h2>Posts</h2>
+<ul>
+{% for post in site.posts %}
+    <li>
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+    </li>
+{% endfor %}
+</ul>

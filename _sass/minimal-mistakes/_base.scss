@@ -13,6 +13,8 @@ body {
   padding: 0;
   /* padding-top added by TS to account for fixed-top (a Bootstrap class) navbar */
   padding-top: 70px;
+  /* padding-bottom added by TS to account for fixed-bottom (a Bootstrap class) footer */
+  padding-bottom: 70px;
   color: $text-color;
   font-family: $global-font-family;
   line-height: 1.5;
@@ -130,6 +132,8 @@ blockquote {
 /* links */
 
 a {
+  color: $link-color;
+
   &:focus {
     @extend %tab-focus;
   }

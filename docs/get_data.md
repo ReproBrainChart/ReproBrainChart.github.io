@@ -1,7 +1,6 @@
 ---
 title: "How to Get Data"
 excerpt: "Get Data"
-sitemap: false
 layout: single
 permalink: /docs/get_data
 
