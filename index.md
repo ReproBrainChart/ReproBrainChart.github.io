@@ -5,7 +5,7 @@ author_profile: false
 ---
 
 <div style="text-align: center;">
-     <img src="/assets/images/logos/rbc_primary_logo.png" width="700" height="300" />
+     <img src="/assets/images/logos/rbc_primary_logo.png" width="70%" height="auto" />
 </div>
 
 <br/>

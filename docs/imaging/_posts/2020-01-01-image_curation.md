@@ -17,7 +17,7 @@ layout: single
 CuBIDS is a sanity preserving workflow that summarizes the heterogeneity in a MRI BIDS dataset, helps prepare MRI datasets for preprocessing, and helps users perform metadata-based quality control on MRI BIDS data.
 
 <div style="text-align: center;">
-    <img src="/assets/images/misc/cubids_workflow.png" width="auto" height="500" />
+    <img src="/assets/images/misc/cubids_workflow.png" width="80%" height="auto" />
 </div>
 
 For each dataset, a CuBIDS summary is created that provides an opportunity to evaluate your data and decide how to handle heterogeneity by grouping the scans on the basis of metadata.
