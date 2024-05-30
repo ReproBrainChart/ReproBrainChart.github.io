@@ -2,7 +2,8 @@
 layout: archive
 title: Team RBC
 ---
-{% assign team = site.categories.team | reverse %}
+
+{% assign team = site.data.team %}
 {% assign sections = "leadership,team,contributors,alumni" | split:"," %}
 {% assign section_titles = "RBC Leadership,RBC Team,RBC Contributors,RBC Alumni" | split:"," %}
 
@@ -13,7 +14,7 @@ title: Team RBC
         <br>
         <table style="justify-content: center; width: 1000px; display: table; table-layout: fixed;">
             {% tablerow member in team_in_section cols:2 %}
-                {% if member.image %}
+                {% if member.image != "n/a" %}
                     {% assign image = member.image %}
                 {% else %}
                     {% assign image = "/assets/images/team/placeholder-user.png" %}
@@ -24,11 +25,11 @@ title: Team RBC
 					</a>
                     <div class="media-body" style="word-wrap: break-word; overflow-wrap: break-word;">
                         <p style="margin: 0px; font-size: 20px; text-align: left; font-weight: bold;">
-                            {%- if member.site -%}
-                                <a href="{{ member.site }}" class="off">{{ member.name }}</a>
+                            {%- if member.website != "n/a" -%}
+                                <a href="{{ member.website }}" class="off">{{ member.firstname }} {{ member.lastname }}</a>
                             {%- else -%}
-                                {{ member.name }}
-                            {%- endif -%}{%- if member.degree -%}, {{ member.degree }}{%- endif -%}
+                                {{ member.firstname }} {{ member.lastname }}
+                            {%- endif -%}{%- if member.degree != "n/a" -%}, {{ member.degree }}{%- endif -%}
                         </p>
                         <p style="margin: 0px; font-size: 16px; text-align: left;">{{ member.position }}</p>
                         <p style="margin: 0px; font-size: 16px; text-align: left;">{{ member.affiliation }}</p>
