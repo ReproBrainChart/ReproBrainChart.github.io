@@ -5,7 +5,7 @@ layout: single
 permalink: /docs/phenotypes
 ---
 
- Advanced brain imaging is not enough for studies of brain development to be useful to understanding developmental psychopathology.  RBC responds to a common obstacle in aggregating data across studies -- different questionnaires can only be compared if harmonized.  To this end, we harmonized instruments across studies to derive comparable dimensions of psychopathology.
+Advanced brain imaging is not enough for studies of brain development to be useful to understanding developmental psychopathology.  RBC responds to a common obstacle in aggregating data across studies -- different questionnaires can only be compared if harmonized.  To this end, we harmonized instruments across studies to derive comparable dimensions of psychopathology.
 
 
 ### Measures in the RBC
