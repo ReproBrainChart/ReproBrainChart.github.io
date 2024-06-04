@@ -170,7 +170,6 @@ if __name__ == "__main__":
         "ReproBrainChart/HBN_BIDS",
         "ReproBrainChart/HBN_CPAC",
         "ReproBrainChart/HBN_FreeSurfer",
-        "ReproBrainChart/HBN_XCP",
         "ReproBrainChart/NKI_BIDS",
         "ReproBrainChart/NKI_CPAC",
         "ReproBrainChart/NKI_FreeSurfer",
