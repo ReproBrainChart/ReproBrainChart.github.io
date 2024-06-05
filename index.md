@@ -82,7 +82,6 @@ author_profile: false
      <br>
 </p>
 
-### TODO: Replace BHRC logo
 <div style="text-align: center;">
      <h2>Contributing Institutions</h2>
      <br/>
