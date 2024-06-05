@@ -93,10 +93,15 @@ author_profile: false
                <img src="/assets/images/logos/NKI.png" style="width: auto; height: 10vw;" />
                <img src="/assets/images/logos/CHOP.png" style="width: auto; height: 10vw;" />
           </div>
-          <div style="display: flex; justify-content: space-around; width: 100%;">
+          <div style="display: flex; justify-content: space-around; width: 100%; margin-bottom: 20px;">
                <img src="/assets/images/logos/beijing_normal_university.png" style="width: auto; height: 10vw;" />
                <img src="/assets/images/logos/columbia_university.png" style="width: auto; height: 10vw;" />
-               <img src="/assets/images/logos/BHRC.png" style="width: auto; height: 10vw;" />
+               <img src="/assets/images/logos/centro_de_pesquisa_e_inovacao_em_saude_mental.jpg" style="width: auto; height: 10vw;" />
+               <img src="/assets/images/logos/ufrgs.jpg" style="width: auto; height: 10vw;" />
+          </div>
+          <div style="display: flex; justify-content: space-around; width: 100%;">
+               <img src="/assets/images/logos/usp.jpg" style="width: auto; height: 10vw;" />
+               <img src="/assets/images/logos/unifesp.jpg" style="width: auto; height: 10vw;" />
           </div>
      </div>
 </div>
