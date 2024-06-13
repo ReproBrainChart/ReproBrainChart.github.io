@@ -1,5 +1,5 @@
 ---
-title: "Blog"
-excerpt: "Blog"
+title: "RBC News"
+excerpt: "News"
 layout: blog
 ---
