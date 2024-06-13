@@ -14,7 +14,7 @@ RBC required learning, building, and updating a lot of new tools along the way (
 Given all this, we hope that this helps investigators not recreate the wheel (preprocessing! QA!), move faster, and do better science.
 
 Run into issues?
-Click the support link and reach out to us on NeuroStars; be sure to use the `rbc` tag to make sure we find it.
+Click the "Get Support" link in the footer and reach out to us on NeuroStars; be sure to use the `rbc` tag to make sure we find it.
 We genuinely welcome your feedback and will strive to make RBC as user-friendly as possible moving forward.
 In this `News` section we will highlight updates to and uses of RBC – so please just reach out to Ted (sattertt at upenn dot edu) directly if you want us to highlight your work using RBC here.
 
