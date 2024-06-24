@@ -10,7 +10,10 @@ on:
   # Runs on pushes targeting the default branch
   push:
     branches: ["master"]
-
+  workflow_run:
+    workflows: ["Track Dataset Repository Clones"]
+    types:
+      - completed
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
