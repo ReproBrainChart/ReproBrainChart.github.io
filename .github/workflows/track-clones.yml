@@ -19,7 +19,7 @@ jobs:
           python-version: 3.9
       - name: Install dependencies
         run: |
-          pip3 install PyGithub
+          pip3 install PyGithub==2.5.0
           python -m pip install --upgrade pip pandas
       - name: Pull any download-stats changes
         run: git pull
