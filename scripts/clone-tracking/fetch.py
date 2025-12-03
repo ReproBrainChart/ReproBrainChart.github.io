@@ -1,7 +1,6 @@
 """Fetch download statistics for a GitHub repository and output to a directory."""
 
 import os
-from datetime import date
 from datetime import datetime as dt
 from datetime import timedelta
 
@@ -173,8 +172,6 @@ if __name__ == "__main__":
         "ReproBrainChart/NKI_BIDS",
         "ReproBrainChart/NKI_CPAC",
         "ReproBrainChart/NKI_FreeSurfer",
-        "ReproBrainChart/PACCT_BIDS",
-        "ReproBrainChart/PACCT_CPAC",
         "ReproBrainChart/PNC_BIDS",
         "ReproBrainChart/PNC_CPAC",
         "ReproBrainChart/PNC_FreeSurfer",
