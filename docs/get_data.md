@@ -130,6 +130,12 @@ Shell glob patterns can be used to get whichever files you might need.
 </div>
 
 
+# License
+
+All of the datasets managed by RBC are made available under a
+[CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en) license.
+
+
 # FAQs
 
 #### Running `datalad get` appears to be stuck - what should I do?
