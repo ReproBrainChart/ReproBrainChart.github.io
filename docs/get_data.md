@@ -6,6 +6,15 @@ permalink: /docs/get_data
 
 ---
 
+<div class="notice--danger notice--lg" markdown="1">
+  <b>WARNING!!</b> A TR metadata error affected bandpass filtering in some RBC functional derivatives
+  (NOT raw data or structural outputs).
+  Impact varies by dataset TR (minimal for TR~1s, larger for TR>2s).
+  Affected derivatives have been temporarily removed; corrected versions coming in phases over 3 months.
+  Patch code available June 1 for urgent needs.
+  Please see [this link](https://gjaxx.r.a.d.sendibm1.com/mk/mr/sh/WCPxRrNLV1LtxMyPT3y1oQhxaYvOr2Of/SZQ42E1kj4hy) for a full description of this issue and our response.
+</div>
+
 ### Install DataLad
 
 RBC is accessible via `datalad`. Follow the instructions [here](https://www.datalad.org/#install)

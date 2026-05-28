@@ -15,3 +15,7 @@
     color: white; /* White text */
     font-style: bold; /* Bold text */
 }
+
+.notice--lg {
+    font-size: 1em !important;
+}
