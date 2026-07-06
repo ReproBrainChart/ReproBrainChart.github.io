@@ -12,4 +12,3 @@ For access, see the [fMRIPrep/XCP-D Pipeline Release section on the Get Data pag
 Run into issues?
 Click the "Get Support" link in the footer and reach out to us on NeuroStars; be sure to use the `rbc` tag to make sure we find it.
 We genuinely welcome your feedback and will strive to make RBC as user-friendly as possible moving forward.
-In this `News` section we will highlight updates to and uses of RBC – so please just reach out to Ted (sattertt at upenn dot edu) directly if you want us to highlight your work using RBC here.

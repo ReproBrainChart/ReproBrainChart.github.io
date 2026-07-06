@@ -33,6 +33,31 @@ The repositories (you can find them all
 
 where `<study>` is replaced with `HBN`, `NKI`, `PNC`, `BHRC` or `CCNP`.
 
+<details class="notice--primary" markdown="1">
+<summary><b>Download data</b></summary>
+<br>
+
+Clone the repository, then use `datalad get` to retrieve file contents:
+
+```bash
+# Clone with HTTPS
+datalad clone https://github.com/ReproBrainChart/<study>_<pipeline>.git
+
+# Or clone with SSH
+datalad clone git@github.com:ReproBrainChart/<study>_<pipeline>.git
+
+# Example: clone the HBN XCP-D repository
+datalad clone https://github.com/ReproBrainChart/HBN_XCP-D.git
+
+# Then enter the repository
+cd HBN_XCP-D
+
+# Download specific files
+datalad get sub-*/ses-*/func/*fsLR_den-91k_desc-denoised_bold.dtseries.nii
+```
+
+</details>
+
 **Boilerplate** detailing processing steps is available in each repository at `logs/CITATION.md`.
 
 <details markdown="1">
