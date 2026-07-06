@@ -24,7 +24,7 @@ A repository describing all of the atlases used by C-PAC in RBC can be found [he
 ## 07/06/2026: New fMRIPrep and XCP-D Derivative Release
 
 RBC now also provides fMRIPrep and XCP-D derivatives.
-For repository naming, Singularity commands, boilerplate locations, QC files, and access instructions, see the [fMRIPrep/XCP-D Pipeline Release section on the Get Data page](/docs/get_data#fmriprep-xcpd-pipeline-release).
+For more information, see the [fMRIPrep/XCP-D Pipeline Release section on the Get Data page](/docs/get_data#fmriprep-xcpd-pipeline-release).
 
 Structural MRI data were processed with [fMRIPrep](https://fmriprep.org/) using the `--anat-only` flag.
 T1w images were corrected for intensity non-uniformity with ANTs N4BiasFieldCorrection, skull-stripped with the ANTs brain extraction workflow using the OASIS30ANTs target template, and segmented into CSF, white matter, and gray matter with FSL FAST.
