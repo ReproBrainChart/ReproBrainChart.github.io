@@ -15,6 +15,114 @@ permalink: /docs/get_data
   Please see [this link](https://gjaxx.r.a.d.sendibm1.com/mk/mr/sh/WCPxRrNLV1LtxMyPT3y1oQhxaYvOr2Of/SZQ42E1kj4hy) for a full description of this issue and our response.
 </div>
 
+<a id="fmriprep-xcpd-pipeline-release"></a>
+<details class="notice--warning notice--lg" markdown="1">
+<summary><b>07/06/2026: fMRIPrep/XCP-D Pipeline Release</b></summary>
+<br>
+
+You can find the FreeSurfer, fMRIPrep and XCP-D derivatives in their corresponding
+repositories on GitHub.
+
+The repositories (you can find them all
+[here](https://github.com/orgs/ReproBrainChart/repositories)) are named as followed:
+
+ * If you're looking for **fMRIPrep anatomical** (processed with `--anat-only`) and **FreeSurfer** derivatives, the repo will be named `<study>_fMRIPrep-Anat`
+ * If you're looking for **fMRIPrep functional** derivatives, the repo will be named `<study>_fMRIPrep-Func`
+ * If you're looking for [**FreeSurfer-Post**](https://github.com/PennLINC/freesurfer-post) derivatives, the repo will be named `<study>_FreeSurfer-Post`
+ * If you're looking for [**XCP-D**](https://xcp-d.readthedocs.io/en/latest/) derivatives, the repo will be named `<study>_XCP-D`
+
+where `<study>` is replaced with `HBN`, `NKI`, `PNC`, `BHRC` or `CCNP`.
+
+**Boilerplate** detailing processing steps is available in each repository at `logs/CITATION.md`.
+
+<details markdown="1">
+<summary><b>fMRIPrep anat only</b> command</summary>
+
+```bash
+singularity run --cleanenv \
+    -B "${PWD}" \
+    -B "code/license.txt:/SGLR/FREESURFER_HOME/license.txt" \
+    containers/.datalad/environments/fmriprep-<version>/image \
+    inputs/data/BIDS \
+    outputs/fmriprep_anat \
+    participant \
+    -w "${PWD}/.git/tmp/wkdir" \
+    --stop-on-first-crash \
+    --fs-license-file /SGLR/FREESURFER_HOME/license.txt \
+    --output-spaces MNI152NLin6Asym:res-1 \
+    --force-bbr \
+    --skip-bids-validation \
+    -vv \
+    --anat-only \
+    --cifti-output 91k \
+    --n_cpus 9 \
+    --mem-mb 14000 \
+    --bids-filter-file "${session-filterfile}" \
+    --participant-label "${subid}"
+```
+</details>
+
+<details markdown="1">
+<summary><b>fMRIPrep func</b> command</summary>
+
+```bash
+singularity run --cleanenv \
+    -B "${PWD}" \
+    -B "code/license.txt:/SGLR/FREESURFER_HOME/license.txt" \
+    containers/.datalad/environments/fmriprep-<version>/image \
+    inputs/data/BIDS \
+    outputs/fmriprep_func \
+    participant \
+    -w "${PWD}/.git/tmp/wkdir" \
+    --stop-on-first-crash \
+    --fs-license-file /SGLR/FREESURFER_HOME/license.txt \
+    --output-spaces func T1w MNI152NLin6Asym:res-2 \
+    --force-bbr \
+    --skip-bids-validation \
+    -vv \
+    --cifti-output 91k \
+    --n_cpus 4 \
+    --mem-mb 30000 \
+    --fs-subjects-dir inputs/data/fmriprep_anat/fmriprep_anat/sourcedata/freesurfer \
+    --bids-filter-file "${session-filterfile}" \
+    --participant-label "${subid}"
+```
+</details>
+
+<details markdown="1">
+<summary><b>XCP-D</b> command</summary>
+
+```bash
+singularity run --cleanenv \
+    -B ${PWD} \
+    -B code/license.txt:/SGLR/FREESURFER_HOME/license.txt \
+    containers/.datalad/environments/xcpd-0-10-6/image \
+    inputs/data/fmriprep_func/fmriprep_func \
+    outputs/xcpd \
+    participant \
+    -w ${PWD}/.git/tmp/wkdir \
+    --stop-on-first-crash \
+    --fs-license-file /SGLR/FREESURFER_HOME/license.txt \
+    -vv \
+    --mode linc \
+    --dummy-scans auto \
+    --input-type fmriprep \
+    --nthreads 8 \
+    --omp-nthreads 8 \
+    --mem-gb 50 \
+    --atlases 4S1056Parcels 4S156Parcels 4S256Parcels 4S356Parcels 4S456Parcels 4S556Parcels 4S656Parcels 4S756Parcels 4S856Parcels 4S956Parcels Glasser Gordon HCP MIDB Tian \
+    --participant-label "${subid#sub-}"
+```
+</details>
+
+<br>
+
+The following **QC files** are available in each repository:
+
+ * `study-<study>_desc-T1_qc.tsv`
+ * `study-<study>_desc-func_qc.tsv`
+</details>
+
 ### Install DataLad
 
 RBC is accessible via `datalad`. Follow the instructions [here](https://www.datalad.org/#install)
@@ -160,4 +268,3 @@ of data you plan on copying to your computer:
 at most a few free GB.
  * If you plan on copying 3D imaging data (e.g. ALFF, REHO) you will need hundreds of GB free.
  * If you plan on copying 4D denoised BOLD timeseries data you will need up to 4TB of free space.
-
