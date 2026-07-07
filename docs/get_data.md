@@ -17,7 +17,7 @@ permalink: /docs/get_data
 
 <a id="fmriprep-xcpd-pipeline-release"></a>
 <details class="notice--warning notice--lg" markdown="1">
-<summary><b>07/06/2026: fMRIPrep/XCP-D Pipeline Release</b></summary>
+<summary><b>07/06/2026: fMRIPrep and XCP-D Release</b></summary>
 <br>
 
 You can find the FreeSurfer, fMRIPrep and XCP-D derivatives in their corresponding
