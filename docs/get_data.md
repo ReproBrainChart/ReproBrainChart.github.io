@@ -11,7 +11,7 @@ permalink: /docs/get_data
   (NOT raw data or structural outputs).
   Impact varies by dataset TR (minimal for TR~1s, larger for TR>2s).
   Affected derivatives have been temporarily removed; corrected versions coming in phases over 3 months.
-  Patch code available June 1 for urgent needs.
+  For an immediate fix to C-PAC derivatives, you can apply this [patch code](https://github.com/ReproBrainChart/2026FunctionalPatch/tree/main/patch). We have also added a [new release for fMRIPrep + XCP-D derivatives](#fmriprep-xcpd-pipeline-release) as described below.
   Please see [this link](https://gjaxx.r.a.d.sendibm1.com/mk/mr/sh/WCPxRrNLV1LtxMyPT3y1oQhxaYvOr2Of/SZQ42E1kj4hy) for a full description of this issue and our response.
 </div>
 
