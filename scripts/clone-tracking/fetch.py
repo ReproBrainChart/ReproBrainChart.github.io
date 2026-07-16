@@ -1,6 +1,7 @@
 """Fetch download statistics for a GitHub repository and output to a directory."""
 
 import os
+import re
 from datetime import datetime as dt
 from datetime import timedelta
 from time import sleep
@@ -26,10 +27,8 @@ def _is_transient_error(exc):
             return response.status_code >= 500
 
         error_message = str(exc).lower()
-        return any(
-            token in error_message
-            for token in (" 500", " 502", " 503", " 504", "timed out", "connection")
-        )
+        has_transient_http_code = re.search(r"\b50[0-4]\b", error_message) is not None
+        return has_transient_http_code or "timed out" in error_message or "connection" in error_message
 
     return False
 
