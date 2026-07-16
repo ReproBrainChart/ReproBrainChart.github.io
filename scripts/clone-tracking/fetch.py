@@ -3,9 +3,50 @@
 import os
 from datetime import datetime as dt
 from datetime import timedelta
+from time import sleep
 
 import pandas as pd
 from github import Github
+from github.GithubException import GithubException
+from requests.exceptions import RequestException
+
+
+MAX_ATTEMPTS = 3
+RETRY_DELAY_SECONDS = 5
+
+
+def _is_transient_error(exc):
+    status_code = getattr(exc, "status", None)
+    if status_code is not None:
+        return status_code >= 500
+    return True
+
+
+def _run_with_retries(func, repo):
+    """Run a GitHub API request with retries on transient failures."""
+    for attempt in range(1, MAX_ATTEMPTS + 1):
+        try:
+            return func()
+        except (GithubException, RequestException) as exc:
+            if not _is_transient_error(exc):
+                raise
+
+            if attempt == MAX_ATTEMPTS:
+                print(
+                    f"Warning: Could not fetch clone statistics for {repo} after "
+                    f"{MAX_ATTEMPTS} attempts. Skipping this repository."
+                )
+                return None
+
+            wait_seconds = RETRY_DELAY_SECONDS * attempt
+            print(
+                f"Transient error while fetching clone statistics for {repo} "
+                f"(attempt {attempt}/{MAX_ATTEMPTS}): {exc}. "
+                f"Retrying in {wait_seconds} seconds..."
+            )
+            sleep(wait_seconds)
+
+    return None
 
 
 def main(repo):
@@ -19,10 +60,15 @@ def main(repo):
     print(f"Fetching clone statistics for {repo}...")
     token = os.environ.get("SECRET_TOKEN")
     g = Github(token)
-    repoobj = g.get_repo(repo)
+    repoobj = _run_with_retries(lambda: g.get_repo(repo), repo)
+    if repoobj is None:
+        return
 
     # List clones for the repository
-    df_clones = clones_to_df(fetch_clones(repoobj))
+    clones = _run_with_retries(lambda: fetch_clones(repoobj), repo)
+    if clones is None:
+        return
+    df_clones = clones_to_df(clones)
     owner_name, repo_name = repo.split("/")
 
     script_dir = os.path.dirname(__file__)
