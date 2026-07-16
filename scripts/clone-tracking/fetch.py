@@ -27,7 +27,7 @@ def _is_transient_error(exc):
             return response.status_code >= 500
 
         error_message = str(exc).lower()
-        has_transient_http_code = re.search(r"\b50[0-4]\b", error_message) is not None
+        has_transient_http_code = re.search(r"\b5\d{2}\b", error_message) is not None
         return has_transient_http_code or "timed out" in error_message or "connection" in error_message
 
     return False
