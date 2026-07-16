@@ -39,7 +39,25 @@ def _is_transient_error(exc):
 
 
 def _run_with_retries(func, repo):
-    """Run a GitHub API request with retries on transient failures."""
+    """Run a GitHub API request with retries on transient failures.
+
+    Parameters
+    ----------
+    func : callable
+        The callable to execute.
+    repo : str
+        Repository name in "owner/repo" format, used for logging.
+
+    Returns
+    -------
+    object or None
+        The callable output, or None if transient failures persist after retries.
+
+    Raises
+    ------
+    GithubException or RequestException
+        Raised immediately for non-transient errors.
+    """
     total_attempts = MAX_RETRIES + 1
     for retry in range(total_attempts):
         attempt = retry + 1
@@ -63,8 +81,6 @@ def _run_with_retries(func, repo):
                 f"Retrying in {wait_seconds} seconds..."
             )
             sleep(wait_seconds)
-
-    return None
 
 
 def main(repo):
