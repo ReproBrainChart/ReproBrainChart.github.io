@@ -13,7 +13,7 @@ from requests.exceptions import ConnectionError, RequestException, Timeout
 
 
 MAX_RETRIES = 2
-RETRY_DELAY_SECONDS = 5
+BASE_RETRY_DELAY_SECONDS = 5
 
 
 def _is_transient_error(exc):
@@ -30,6 +30,7 @@ def _is_transient_error(exc):
             return response.status_code >= 500
 
         error_message = str(exc).lower()
+        # urllib3 RetryError messages include "too many 503 error responses".
         return (
             re.search(r"too many 5\d{2} error responses", error_message) is not None
             or "timed out" in error_message
@@ -74,7 +75,7 @@ def _run_with_retries(func, repo):
                 )
                 return None
 
-            wait_seconds = RETRY_DELAY_SECONDS * (2**retry)
+            wait_seconds = BASE_RETRY_DELAY_SECONDS * (2**retry)
             print(
                 f"Transient error while fetching clone statistics for {repo} "
                 f"(attempt {attempt}/{total_attempts}): {exc}. "
