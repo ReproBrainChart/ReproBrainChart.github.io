@@ -9,10 +9,10 @@ from time import sleep
 import pandas as pd
 from github import Github
 from github.GithubException import GithubException
-from requests.exceptions import RequestException
+from requests.exceptions import ConnectionError, RequestException, Timeout
 
 
-MAX_ATTEMPTS = 3
+MAX_RETRIES = 2
 RETRY_DELAY_SECONDS = 5
 
 
@@ -22,37 +22,44 @@ def _is_transient_error(exc):
         return status_code is not None and status_code >= 500
 
     if isinstance(exc, RequestException):
+        if isinstance(exc, (ConnectionError, Timeout)):
+            return True
+
         response = getattr(exc, "response", None)
         if response is not None and response.status_code is not None:
             return response.status_code >= 500
 
         error_message = str(exc).lower()
-        has_transient_http_code = re.search(r"\b5\d{2}\b", error_message) is not None
-        return has_transient_http_code or "timed out" in error_message or "connection" in error_message
+        return (
+            re.search(r"too many 5\d{2} error responses", error_message) is not None
+            or "timed out" in error_message
+        )
 
     return False
 
 
 def _run_with_retries(func, repo):
     """Run a GitHub API request with retries on transient failures."""
-    for attempt in range(1, MAX_ATTEMPTS + 1):
+    total_attempts = MAX_RETRIES + 1
+    for retry in range(total_attempts):
+        attempt = retry + 1
         try:
             return func()
         except (GithubException, RequestException) as exc:
             if not _is_transient_error(exc):
                 raise
 
-            if attempt == MAX_ATTEMPTS:
+            if retry == MAX_RETRIES:
                 print(
                     f"Warning: Could not fetch clone statistics for {repo} after "
-                    f"{MAX_ATTEMPTS} attempts. Skipping this repository."
+                    f"{total_attempts} attempts. Skipping this repository."
                 )
                 return None
 
-            wait_seconds = RETRY_DELAY_SECONDS * (2 ** (attempt - 1))
+            wait_seconds = RETRY_DELAY_SECONDS * (2**retry)
             print(
                 f"Transient error while fetching clone statistics for {repo} "
-                f"(attempt {attempt}/{MAX_ATTEMPTS}): {exc}. "
+                f"(attempt {attempt}/{total_attempts}): {exc}. "
                 f"Retrying in {wait_seconds} seconds..."
             )
             sleep(wait_seconds)
