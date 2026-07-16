@@ -16,10 +16,22 @@ RETRY_DELAY_SECONDS = 5
 
 
 def _is_transient_error(exc):
-    status_code = getattr(exc, "status", None)
-    if status_code is not None:
-        return status_code >= 500
-    return True
+    if isinstance(exc, GithubException):
+        status_code = getattr(exc, "status", None)
+        return status_code is not None and status_code >= 500
+
+    if isinstance(exc, RequestException):
+        response = getattr(exc, "response", None)
+        if response is not None and response.status_code is not None:
+            return response.status_code >= 500
+
+        error_message = str(exc).lower()
+        return any(
+            token in error_message
+            for token in (" 500", " 502", " 503", " 504", "timed out", "connection")
+        )
+
+    return False
 
 
 def _run_with_retries(func, repo):
@@ -38,7 +50,7 @@ def _run_with_retries(func, repo):
                 )
                 return None
 
-            wait_seconds = RETRY_DELAY_SECONDS * attempt
+            wait_seconds = RETRY_DELAY_SECONDS * (2 ** (attempt - 1))
             print(
                 f"Transient error while fetching clone statistics for {repo} "
                 f"(attempt {attempt}/{MAX_ATTEMPTS}): {exc}. "
