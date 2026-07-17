@@ -1,11 +1,87 @@
 """Fetch download statistics for a GitHub repository and output to a directory."""
 
 import os
+import re
 from datetime import datetime as dt
 from datetime import timedelta
+from time import sleep
 
 import pandas as pd
 from github import Github
+from github.GithubException import GithubException
+from requests.exceptions import ConnectionError, RequestException, Timeout
+
+
+MAX_RETRIES = 2
+BASE_RETRY_DELAY_SECONDS = 5
+
+
+def _is_transient_error(exc):
+    if isinstance(exc, GithubException):
+        status_code = getattr(exc, "status", None)
+        return status_code is not None and status_code >= 500
+
+    if isinstance(exc, RequestException):
+        if isinstance(exc, (ConnectionError, Timeout)):
+            return True
+
+        response = getattr(exc, "response", None)
+        if response is not None and response.status_code is not None:
+            return response.status_code >= 500
+
+        error_message = str(exc).lower()
+        # urllib3 RetryError messages include "too many 503 error responses".
+        return (
+            re.search(r"too many 5\d{2} error responses", error_message) is not None
+            or "timed out" in error_message
+        )
+
+    return False
+
+
+def _run_with_retries(func, repo):
+    """Run a GitHub API request with retries on transient failures.
+
+    Parameters
+    ----------
+    func : callable
+        The callable to execute.
+    repo : str
+        Repository name in "owner/repo" format, used for logging.
+
+    Returns
+    -------
+    object or None
+        The callable output, or None if transient failures persist after retries.
+
+    Raises
+    ------
+    GithubException or RequestException
+        Raised immediately for non-transient errors.
+    """
+    total_attempts = MAX_RETRIES + 1
+    for retry in range(total_attempts):
+        attempt = retry + 1
+        try:
+            return func()
+        except (GithubException, RequestException) as exc:
+            if not _is_transient_error(exc):
+                raise
+
+            if retry == MAX_RETRIES:
+                print(
+                    f"Warning: Could not fetch clone statistics for {repo} after "
+                    f"{total_attempts} attempts. Skipping this repository."
+                )
+                return None
+
+            wait_seconds = BASE_RETRY_DELAY_SECONDS * (2**retry)
+            print(
+                f"Transient error while fetching clone statistics for {repo} "
+                f"(attempt {attempt}/{total_attempts}): {exc}. "
+                f"Retrying in {wait_seconds} seconds..."
+            )
+            sleep(wait_seconds)
 
 
 def main(repo):
@@ -19,10 +95,15 @@ def main(repo):
     print(f"Fetching clone statistics for {repo}...")
     token = os.environ.get("SECRET_TOKEN")
     g = Github(token)
-    repoobj = g.get_repo(repo)
+    repoobj = _run_with_retries(lambda: g.get_repo(repo), repo)
+    if repoobj is None:
+        return
 
     # List clones for the repository
-    df_clones = clones_to_df(fetch_clones(repoobj))
+    clones = _run_with_retries(lambda: fetch_clones(repoobj), repo)
+    if clones is None:
+        return
+    df_clones = clones_to_df(clones)
     owner_name, repo_name = repo.split("/")
 
     script_dir = os.path.dirname(__file__)
