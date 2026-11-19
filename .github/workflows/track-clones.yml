@@ -25,7 +25,7 @@ jobs:
         run: git pull
       - name: Run fetch.py
         env:
-          SECRET_TOKEN: ${{ github.token }}
+          SECRET_TOKEN: ${{ secrets.SECRET_TOKEN }}
         run: python scripts/clone-tracking/fetch.py
       - name: Run cumulative.py
         run: python scripts/clone-tracking/cumulative.py
